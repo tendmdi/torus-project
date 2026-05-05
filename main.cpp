@@ -53,6 +53,7 @@ public:
 int main()
 {
     int K;
+    cout << "Vvedite kol-vo tochek: ";
     cin >> K;
 
     TorusGenerator gen(5.0, 2.0);
