@@ -1,10 +1,21 @@
 #include <iostream>
 using namespace std;
+#include <vector>
+#include <fstream>
 
 const double PI = 3.141592653589793;
 
 int main()
 {
+    int K;
+    cin >> K;
+
+    TorusGenerator gen(5.0, 2.0);
+    vector<point3d> points;
+
+    for(int i = 0; i < K; i++)
+        points.push_back(gen.rnd());
+
     return 0;
 }
 struct point3d
