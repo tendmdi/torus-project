@@ -7,25 +7,26 @@ using namespace std;
 
 const double PI = 3.141592653589793;
 
-
+/// @brief структура точки в 3д пространстве
 struct point3d
 {
     double x, y, z;
-
+/// @brief конструктор точки 
     point3d(double x=0.0, double y=0.0, double z=0.0)
         : x(x), y(y), z(z) {}
-
+/// @brief вывод координат точки 
     void print() const
     {
         cout << "x=" << x << " y=" << y << " z=" << z << endl;
     }
+    /// @brief возвращаем координаты х у и z
     double getBackX() const { return x; }
     double getBackY() const { return y; }
     double getBackZ() const { return z; }
 };
 #include <cmath>
 #include <random>
-
+/// @brief класс генерациии случайных точек на поверхности тора
 class TorusGenerator
 {
 private:
@@ -34,12 +35,15 @@ private:
     std::uniform_real_distribution<> dist;
 
 public:
+/// @brief конструктор генератора точек
+/// @param R большой радиус
+/// @param r малый радиус
     TorusGenerator(double R, double r)
         : R(R), r(r), dist(0.0, 2*PI)
     {
         gen.seed(std::random_device{}());
     }
-
+/// @brief генерация случайной точки на торе 
     point3d rnd()
     {
         double u = dist(gen);
@@ -51,9 +55,11 @@ public:
 
         return point3d(x, y, z);
     }
+    /// @brief получить большой/малый радиус
     double getR() const { return R; }
     double getr() const { return r; }
 };
+/// @brief основная функция программы меню и работа с точками 
 int main()
 {
     int K;
