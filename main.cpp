@@ -2,6 +2,8 @@
 using namespace std;
 #include <vector>
 #include <fstream>
+#include <cmath>
+#include <random>
 
 const double PI = 3.141592653589793;
 
@@ -49,6 +51,8 @@ public:
 
         return point3d(x, y, z);
     }
+    double getR() const { return R; }
+    double getr() const { return r; }
 };
 int main()
 {
@@ -56,7 +60,11 @@ int main()
     cout << "Vvedite kol-vo tochek: ";
     cin >> K;
 
-    TorusGenerator gen(5.0, 2.0);
+    double R, r;
+    cout << "Vvedite parametry tora R i r: ";
+    cin >> R >> r;
+
+    TorusGenerator gen(R, r);
     vector<point3d> points;
 
     for(int i = 0; i < K; i++)
@@ -69,6 +77,8 @@ int main()
         cout << "2. Pokazat koordinaty\n";
         cout << "3. Dobavit tochky\n";
         cout << "4. Sohranit v fail\n";
+        cout << "5. Pokazat parametry tora\n";
+        cout << "6. Soxranit parametry v setting.dat\n";
         cout << "0. Vixod\n";
 
         cin >> choice;
@@ -78,7 +88,7 @@ int main()
             int i;
             cout << "Vvedite index: ";
             cin >> i;
-            if(i >= 0 && i < points.size())
+            if(i >= 0 && i < (int)points.size())
                 points[i].print();
         }
 
@@ -89,7 +99,7 @@ int main()
             cout << "Vvedite index i koordinaty (x/y/z): ";
             cin >> i >> c;
 
-            if(i >= 0 && i < points.size())
+            if(i >= 0 && i < (int)points.size())
             {
                 if(c=='x') cout << points[i].getBackX() << endl;
                 if(c=='y') cout << points[i].getBackY() << endl;
@@ -114,6 +124,20 @@ int main()
 
             file.close();
             cout << "Soxraneno v points.txt\n";
+        }
+        if(choice == 5)
+        {
+            cout << "R = " << R << endl;
+            cout << "r = " << r << endl;
+        }
+
+        if(choice == 6)
+        {
+            ofstream f("setting.dat");
+            f << "R=" << R << endl;
+            f << "r=" << r << endl;
+            f.close();
+            cout << "Soxraneno v setting.dat\n";
         }
 
     } while(choice != 0);
